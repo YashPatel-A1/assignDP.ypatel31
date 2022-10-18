@@ -1,5 +1,5 @@
 package assignDP.src;
 
-public class OfferingList {
+public class OfferingList extends ArrayList {
     
 }
