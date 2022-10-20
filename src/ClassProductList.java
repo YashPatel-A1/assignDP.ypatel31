@@ -6,4 +6,8 @@ public class ClassProductList extends ArrayList{
 
     }
 
+    @Override
+    public ListIterator getIterator() {
+        return null;
+    }
 }
