@@ -6,22 +6,23 @@ public abstract class Person {
 
     public abstract void showMenu();
     
-    public void showAddButton(){
+    public void showAddButton(){    System.out.println("Method: showAddButton");    }
+
+    public void showViewButton(){    System.out.println("Method: showViewButton");    }
+
+    public void showRadioButton(){    System.out.println("Method: showRadioButton");    }
+
+    public void showLabels(){
 
     }
 
-    public void showViewButton(){
+    public abstract ProductMenu CreatProductMenu();
 
+    public void add(){
+        System.out.println("Add item to ProductMenu");
     }
 
-    public void showRadioButton(){
+    public Person(MeatProductMenu productMenu){
 
     }
-
-    public void showLables(){
-
-    }
-
-    public abstract ProductMenu CreatProductMenu();    
-
 }

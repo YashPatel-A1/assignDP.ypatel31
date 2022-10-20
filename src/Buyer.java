@@ -14,5 +14,8 @@ public class Buyer extends Person {
         return null;
     }
 
+    public Buyer(ProductMenu productMenu){
+        super((MeatProductMenu) productMenu);
+    }
     
 }
