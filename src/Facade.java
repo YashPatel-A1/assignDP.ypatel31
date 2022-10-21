@@ -13,13 +13,13 @@ public class Facade {
     private ClassProductList theProductList;
     private Person thePerson;
     UserInfo info = new UserInfo();
+
+    ArrayList<String> productList = new ArrayList<String>();
+    ArrayList<Integer> productType = new ArrayList<Integer>();
+    ArrayList<String> idx0 = new ArrayList<String >();
+    ArrayList<String> idx1 = new ArrayList<String>();
+
     private Login lPerson;
-
-    ArrayList<String> productList = new ArrayList<>();
-    ArrayList<Integer> productType = new ArrayList<>();
-    ArrayList<String> idx0 = new ArrayList<>();
-    ArrayList<String> idx1 = new ArrayList<>();
-
 
 
     public boolean login() throws IOException {
@@ -48,7 +48,7 @@ public class Facade {
     public void viewTrading() throws FileNotFoundException, IOException {
         System.out.println("Method: viewTrading");
 
-        File file = new File("src/dataBase.txt");
+        File file = new File("src\\dataBase");
         BufferedReader tradeingBR = new BufferedReader(new FileReader(file));
         ArrayList<Integer>alUserType=new ArrayList<Integer>();
         ArrayList<String>alUserName=new ArrayList<String>();
@@ -91,9 +91,11 @@ public class Facade {
     public void submitBidding(String userName, int userType, String productName, int bidCost) throws IOException {
         System.out.println("Method: submitBidding");
 
-        FileWriter fw = new FileWriter("src/dataBase.txt",true);
+        FileWriter fw = new FileWriter("src\\dataBase",true);
         String bidDetails = "\n"+userName+" "+Integer.toString(userType)+" "+productName+" "+Integer.toString(bidCost);
+        fw.flush();
         fw.write(bidDetails);
+        fw.close();
 
     }
 
@@ -104,7 +106,7 @@ public class Facade {
     }
 
     public void createProductList() throws IOException {
-        System.out.println("Method: createProductList");
+        //System.out.println("Method: createProductList");
 
         File file = new File("src/ProductInfo.txt");
         BufferedReader productListBR = new BufferedReader(new FileReader(file));
@@ -140,20 +142,20 @@ public class Facade {
         System.out.println("Remove Trading operation 2: ");
         int operationTrade = sc.nextInt();
 
-        System.out.println(" Your selected product is "+productList.get(prodType-1));
+        System.out.println(" Your selected product is "+productList.get(prodType));
         
-        int productCategory = productType.get(prodType-1);
+        int productCategory = productType.get(prodType);
 
         if(operationTrade == 0){
             if(productCategory==0){
                 ProductMenu meatProdMenu = new MeatProductMenu();
                 meatProdMenu.showAddButton();
-                addTrading(info.userName,info.userType,productList.get(prodType-1));
+                addTrading(info.userName,info.userType,productList.get(prodType));
             }
             if(productCategory==1){
                 ProductMenu proProdMenu = new ProduceProductMenu();
                 proProdMenu.showAddButton();
-                addTrading(info.userName,info.userType,productList.get(prodType-1));
+                addTrading(info.userName,info.userType,productList.get(prodType));
             }
         }
         if(operationTrade==1){
@@ -181,14 +183,15 @@ public class Facade {
     public void productOperation() { System.out.println("Method: productOperation");   }
 
 
-    public void Facade() throws IOException{
+    public Facade() throws IOException{
+        //System.out.println("Facade constructor: ");
         DataBase();
         createProductList();
         lPerson = new Login();
     }
 
     public void DataBase() throws IOException{
-        File dataBase = new File("src/dataBase.txt");
+        File dataBase = new File("src/dataBase");
         if(dataBase.createNewFile()){}
         else{}
     }
